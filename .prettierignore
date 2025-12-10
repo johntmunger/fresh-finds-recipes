@@ -1,0 +1,12 @@
+node_modules
+dist
+build
+.git
+*.min.js
+*.min.css
+coverage
+.next
+.nuxt
+.cache
+package-lock.json
+

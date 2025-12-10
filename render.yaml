@@ -1,0 +1,13 @@
+services:
+  # Web Service - serves both frontend and backend
+  - type: web
+    name: vuejs-aidd-todo-app
+    runtime: node
+    plan: free
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: NODE_ENV=production npm run start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_OPTIONS
+        value: --max-old-space-size=2048
+
