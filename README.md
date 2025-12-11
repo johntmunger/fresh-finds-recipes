@@ -2,9 +2,9 @@
 
 Full-stack todo application with Vuejs 3 frontend and Express.js backend, featuring SQLite database persistence.
 
-## 🚀 [Live Demo](https://vuejs-aidd-todo-app.onrender.com/)
+## 🚀 <a href="https://vuejs-aidd-todo-app.onrender.com/" target="_blank" rel="noopener noreferrer">Live Demo</a>
 
-**Try it now:** [https://vuejs-aidd-todo-app.onrender.com/](https://vuejs-aidd-todo-app.onrender.com/)
+**Try it now:** <a href="https://vuejs-aidd-todo-app.onrender.com/" target="_blank" rel="noopener noreferrer">https://vuejs-aidd-todo-app.onrender.com/</a>
 
 > **Note:** The app is hosted on Render's free tier and may take 30-60 seconds to wake up on first load.
 
