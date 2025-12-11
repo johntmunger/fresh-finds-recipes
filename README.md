@@ -182,7 +182,7 @@ When you commit with conventional format:
 
 1. Your commit is validated automatically
 2. Changelog is updated with your changes
-3. Changes are documented in `documentation/CHANGELOG.md`
+3. Changes are documented in `CHANGELOG.md`
 
 📖 **[Complete Commit Guide](.claude/commands/commits.md)** - Detailed documentation with examples and best practices
 
@@ -306,8 +306,8 @@ npm run preview
 ├── .prettierrc              # Prettier configuration
 ├── .prettierignore          # Prettier ignore patterns
 ├── eslint.config.js         # ESLint configuration (flat config)
+├── CHANGELOG.md             # Manually maintained changelog
 ├── documentation/           # Project documentation
-│   ├── CHANGELOG.md         # Manually maintained changelog
 │   ├── DEPLOYMENT.md        # Deployment guide for Render.com
 │   └── QUICKSTART.md        # Quick start guide
 ├── vite.config.ts           # Vite configuration with proxy
@@ -410,7 +410,7 @@ For detailed backend documentation including database schema, API specifications
 
 ## Changelog
 
-For a detailed history of changes, updates, and releases, see the [CHANGELOG.md](documentation/CHANGELOG.md).
+For a detailed history of changes, updates, and releases, see the [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
