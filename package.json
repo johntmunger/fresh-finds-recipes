@@ -15,6 +15,7 @@
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,vue}\"",
     "lint": "eslint \"src/**/*.{ts,tsx,js,jsx,vue}\"",
     "lint:fix": "eslint \"src/**/*.{ts,tsx,js,jsx,vue}\" --fix",
+    "docs:sync": "bash scripts/sync-docs.sh",
     "prepare": "husky"
   },
   "dependencies": {

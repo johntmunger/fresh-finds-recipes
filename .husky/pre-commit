@@ -1,1 +1,7 @@
 npm test
+
+# Sync .claude/commands docs to documentation folder if any have changed
+if git diff --cached --name-only | grep -q "^\.claude/commands/.*\.md$"; then
+  echo "Detected changes in .claude/commands/*.md files, syncing to documentation/..."
+  ./scripts/sync-docs.sh
+fi
