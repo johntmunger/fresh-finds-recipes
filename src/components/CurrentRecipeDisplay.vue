@@ -16,7 +16,7 @@ const emit = defineEmits<{
 
 const isEditing = ref(false);
 const editValue = ref("");
-const inputRef = ref<HTMLInputElement | null>(null);
+const inputRef = ref<any>(null);
 
 const startEdit = (currentName: string) => {
   isEditing.value = true;
@@ -45,7 +45,7 @@ const handleBlur = () => {
   }
 };
 
-const handleKeydown = (event: KeyboardEvent) => {
+const handleKeydown = (event: any) => {
   if (event.key === "Enter") {
     saveEdit();
   } else if (event.key === "Escape") {
@@ -68,7 +68,7 @@ const handleKeydown = (event: KeyboardEvent) => {
       />
     </div>
     <div v-else class="flex-1 flex items-center gap-2">
-      <Icon icon="mdi:chef-hat" class="text-2xl text-green-700 flex-shrink-0" />
+      <Icon icon="mdi:chef-hat" class="text-2xl text-green-700 shrink-0" />
       <h2
         class="text-lg sm:text-xl font-semibold"
         :class="recipeId ? 'text-green-700' : 'text-gray-500'"
