@@ -432,7 +432,7 @@ const dismissError = () => {
                   Browse all: https://icon-sets.iconify.design/mdi/?query=food
                 -->
                 <Icon
-                  icon="ph:shopping-cart"
+                  icon="mdi:basket-outline"
                   class="text-4xl sm:text-5xl md:text-5xl text-green-800"
                 />
               </div>
