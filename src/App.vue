@@ -7,6 +7,7 @@ import IngredientList from "./components/IngredientList.vue";
 import SaveRecipeModal from "./components/SaveRecipeModal.vue";
 import CurrentRecipeDisplay from "./components/CurrentRecipeDisplay.vue";
 import DeleteConfirmModal from "./components/DeleteConfirmModal.vue";
+import UnsavedChangesModal from "./components/UnsavedChangesModal.vue";
 import * as api from "./services/api";
 
 // Background images - bright kitchen/restaurant themed for light mode
@@ -32,13 +33,21 @@ const error = ref<string | null>(null);
 const showSaveModal = ref(false);
 const showDeleteConfirm = ref(false);
 const showRecipesDropdown = ref(false);
+const showUnsavedChanges = ref(false);
 const currentBackground = ref("");
 const hasUserInteracted = ref(false);
+const hasUnsavedChanges = ref(false);
+const originalIngredients = ref<string[]>([]);
 
 // Select random background on mount
 onMounted(async () => {
   currentBackground.value = backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
   await Promise.all([loadIngredients(), loadRecipes()]);
+
+  // Load the most recent recipe if exists and no ingredients
+  if (recipes.value.length > 0 && ingredients.value.length === 0) {
+    await loadRecipeIngredients(recipes.value[0]);
+  }
 
   // Close dropdown when clicking outside
   document.addEventListener("click", handleClickOutside);
@@ -83,6 +92,7 @@ const loadRecipes = async () => {
 
 const addIngredient = async (name: string) => {
   hasUserInteracted.value = true;
+  hasUnsavedChanges.value = true;
   error.value = null;
 
   // Capitalize first letter of first word
@@ -100,6 +110,7 @@ const addIngredient = async (name: string) => {
 
 const updateIngredient = async (id: number, name: string) => {
   hasUserInteracted.value = true;
+  hasUnsavedChanges.value = true;
   const ingredient = ingredients.value.find((i) => i.id === id);
   if (!ingredient) return;
 
@@ -118,6 +129,7 @@ const updateIngredient = async (id: number, name: string) => {
 
 const deleteIngredient = async (id: number) => {
   hasUserInteracted.value = true;
+  hasUnsavedChanges.value = true;
   const ingredientIndex = ingredients.value.findIndex((i) => i.id === id);
   if (ingredientIndex === -1) return;
 
@@ -155,8 +167,8 @@ const saveRecipe = async (recipeName: string) => {
     // Close modal
     showSaveModal.value = false;
 
-    // Keep ingredients displayed so user can see the saved recipe
-    // Don't clear them - they can manually add more or delete items
+    // Mark as saved (no unsaved changes)
+    hasUnsavedChanges.value = false;
     hasUserInteracted.value = false; // Reset interaction flag to hide warnings
   } catch (err) {
     error.value = err instanceof api.ApiError ? err.message : "Failed to save recipe";
@@ -181,6 +193,10 @@ const loadRecipeIngredients = async (recipe: Recipe) => {
 
     // Set current recipe
     currentRecipe.value = recipe;
+    
+    // Mark as no unsaved changes (just loaded)
+    hasUnsavedChanges.value = false;
+    hasUserInteracted.value = false;
   } catch (err) {
     error.value = err instanceof api.ApiError ? err.message : "Failed to load recipe";
     console.error("Error loading recipe:", err);
@@ -302,6 +318,43 @@ watch(
   },
   { immediate: true }
 );
+
+const handleNewRecipe = () => {
+  if (hasUnsavedChanges.value && ingredients.value.length > 0) {
+    // Show confirmation modal
+    showUnsavedChanges.value = true;
+  } else {
+    // Clear immediately
+    clearIngredients();
+  }
+};
+
+const clearIngredients = async () => {
+  error.value = null;
+  try {
+    // Clear all ingredients
+    for (const ingredient of ingredients.value) {
+      await api.deleteIngredient(ingredient.id);
+    }
+    ingredients.value = [];
+    currentRecipe.value = null;
+    hasUnsavedChanges.value = false;
+    hasUserInteracted.value = false;
+    showUnsavedChanges.value = false;
+  } catch (err) {
+    error.value = err instanceof api.ApiError ? err.message : "Failed to clear ingredients";
+    console.error("Error clearing ingredients:", err);
+  }
+};
+
+const saveAndClear = () => {
+  showUnsavedChanges.value = false;
+  openSaveModal();
+};
+
+const clearWithoutSaving = async () => {
+  await clearIngredients();
+};
 
 const dismissError = () => {
   error.value = null;
@@ -513,8 +566,23 @@ const dismissError = () => {
               <div v-if="ingredients.length > 0 || recipes.length > 0" class="mb-6 sm:mb-8">
                 <div class="flex flex-col gap-2">
                   <div class="flex gap-2">
+                    <!-- New Button -->
                     <button
-                      class="px-3 py-2 sm:px-6 sm:py-2.5 rounded-lg sm:rounded-xl transition-all duration-300 font-semibold flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm border bg-gradient-to-r from-green-600 to-emerald-600 text-white border-green-500 hover:from-green-700 hover:to-emerald-700 hover:scale-105 whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                      class="px-3 py-2 sm:px-6 sm:py-2.5 rounded-lg sm:rounded-xl transition-all duration-300 font-semibold flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm border text-gray-700 bg-white/70 border-gray-300 hover:bg-white hover:border-gray-400 hover:text-gray-900 hover:scale-105 whitespace-nowrap"
+                      @click="handleNewRecipe"
+                    >
+                      <Icon icon="mdi:plus" class="text-base sm:text-xl flex-shrink-0" />
+                      <span>New</span>
+                    </button>
+
+                    <!-- Save Recipe Button - Secondary style when no changes -->
+                    <button
+                      :class="[
+                        'px-3 py-2 sm:px-6 sm:py-2.5 rounded-lg sm:rounded-xl transition-all duration-300 font-semibold flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm border whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100',
+                        hasUnsavedChanges
+                          ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white border-green-500 hover:from-green-700 hover:to-emerald-700 hover:scale-105'
+                          : 'text-gray-700 bg-white/70 border-gray-300 hover:bg-white hover:border-gray-400 hover:text-gray-900 hover:scale-105'
+                      ]"
                       :disabled="!canSaveRecipe"
                       :title="
                         isDuplicateRecipe
@@ -682,6 +750,14 @@ const dismissError = () => {
       :recipe-name="currentRecipeName"
       @close="showDeleteConfirm = false"
       @confirm="deleteCurrentRecipe"
+    />
+
+    <!-- Unsaved Changes Modal -->
+    <UnsavedChangesModal
+      :is-open="showUnsavedChanges"
+      @close="showUnsavedChanges = false"
+      @save-and-clear="saveAndClear"
+      @clear-without-saving="clearWithoutSaving"
     />
   </div>
 </template>
