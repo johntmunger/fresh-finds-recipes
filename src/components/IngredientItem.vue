@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, nextTick } from "vue";
+import { ref, nextTick, onMounted, onBeforeUnmount } from "vue";
 import type { Ingredient } from "../types/ingredient";
 import { Icon } from "@iconify/vue";
 
@@ -16,6 +16,7 @@ const isEditing = ref(false);
 const editValue = ref("");
 const inputRef = ref<HTMLInputElement | null>(null);
 const showActions = ref(false);
+const itemRef = ref<any>(null);
 
 const startEdit = (currentName: string) => {
   isEditing.value = true;
@@ -55,10 +56,26 @@ const handleKeydown = (event: KeyboardEvent, id: number) => {
 const toggleActions = () => {
   showActions.value = !showActions.value;
 };
+
+// Handle click outside to hide actions
+const handleClickOutside = (event: any) => {
+  if (itemRef.value && !itemRef.value.contains(event.target)) {
+    showActions.value = false;
+  }
+};
+
+onMounted(() => {
+  document.addEventListener("click", handleClickOutside);
+});
+
+onBeforeUnmount(() => {
+  document.removeEventListener("click", handleClickOutside);
+});
 </script>
 
 <template>
   <li
+    ref="itemRef"
     class="group flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-gradient-to-r from-white/70 to-white/90 backdrop-blur-sm rounded-xl shadow-md hover:shadow-xl hover:shadow-gray-300/50 hover:from-white/90 hover:to-white transition-all duration-300 border border-gray-200 hover:border-green-300 animate-slide-in-up hover:scale-[1.02] active:scale-[0.98]"
     @click="toggleActions"
   >
