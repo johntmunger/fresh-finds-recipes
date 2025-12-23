@@ -1,5 +1,5 @@
 services:
-  # Web Service - serves both frontend and backend
+  # Web Service - Fresh & Fast Finds (serves both frontend and backend)
   - type: web
     name: fresh-finds-recipes
     runtime: node
