@@ -12,6 +12,30 @@ All notable changes to this project will be documented in this file.
 
 **App transformed from Todo application to Recipe & Ingredients manager**
 
+### Latest Updates (Same Day)
+
+#### Added
+- ⏰ Readable timestamps on saved recipes (relative time: 5m ago, 2h ago, etc.)
+- 🆕 "New" button to start fresh ingredient lists with unsaved changes protection
+- 🔘 Button-style borders on edit/delete icons for better clarity
+- 💾 Persistent disk configuration for Render.com deployment
+- 🧺 Iconify-based logo system for easy icon swapping
+
+#### Changed
+- 🛒 Logo updated to basket outline icon (mdi:basket-outline)
+- 📱 Favicon updated to match basket outline design
+- 💾 Recipe saving now properly updates existing recipes (no duplicates)
+- 🟢 Save Recipe button: Only activates green on adding ingredients (not edit/delete)
+- 📝 Save modal pre-populates with current recipe name for quick updates
+- 🚫 Duplicate detection excludes current recipe from validation
+- 📏 Inline edit inputs use 16px font to prevent iOS zoom
+
+#### Fixed
+- 🐛 Recipe updates creating duplicate entries in database
+- 🐛 iOS zoom on inline editing (ingredient names and recipe names)
+- 🐛 Duplicate recipe warnings showing when updating current recipe
+- 🐛 Missing Vue template closing tags
+
 ### Added
 
 #### 🍳 Core Recipe Features
