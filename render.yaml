@@ -10,6 +10,11 @@ services:
     startCommand: NODE_ENV=production npm run start
     healthCheckPath: /api/health
     autoDeploy: true  # Automatically deploy on push to main
+    # Persistent disk for SQLite database
+    disk:
+      name: recipes-database
+      mountPath: /opt/render/project/src/server/db
+      sizeGB: 1
     envVars:
       - key: NODE_ENV
         value: production
