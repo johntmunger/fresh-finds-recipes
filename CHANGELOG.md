@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 #### 🍳 Core Recipe Features
+
 - ✨ Ingredient management system (add, edit, delete)
 - 📝 Recipe saving with ingredient lists
 - 💾 Recipe library with load functionality
@@ -25,6 +26,7 @@ All notable changes to this project will be documented in this file.
 - 💬 Unsaved changes warning with save/discard options
 
 #### 🎨 UI/UX Enhancements
+
 - 🌅 Light mode design with prominent background imagery
 - 🖼️ 10 rotating kitchen/restaurant background images
 - 🛒 Shopping basket logo with circular border
@@ -38,6 +40,7 @@ All notable changes to this project will be documented in this file.
 - 📊 Live statistics (ingredient count, recipe count)
 
 #### 📱 Mobile Optimization
+
 - 🔍 Fixed iOS form zoom (16px minimum font size)
 - 👆 Tap-to-reveal edit/delete icons
 - 🖱️ Click-away to hide actions
@@ -46,6 +49,7 @@ All notable changes to this project will be documented in this file.
 - 📏 Compact button layouts prevent text wrapping
 
 #### 🎭 Visual Polish
+
 - 🌟 Subtle white shadows on header for readability
 - 🔘 Button-style borders on edit/delete icons
 - 🎨 Dynamic Save button (green when changes, gray when clean)
@@ -55,16 +59,18 @@ All notable changes to this project will be documented in this file.
 - 🎪 Beautiful modal dialogs for save/delete actions
 
 #### 🔧 Technical Improvements
+
 - 🗄️ Migrated database schema (todos → recipes/ingredients)
 - 🔌 New API endpoints for ingredients and recipes
 - 🛡️ Backend duplicate validation (409 Conflict response)
 - 🧹 Database cleanup script (removes duplicates on dev start)
-- 💾 Persistent disk support for Render deployment ($1/month)
+- 💾 Persistent disk support for Render deployment
 - 📦 Updated app name to "fresh-finds-recipes"
 
 ### Changed
 
 #### 🎨 Branding & Theme
+
 - 📛 App renamed to "Fresh & Fast Finds"
 - 🎨 Color theme: Blue → Green (emerald/green palette)
 - 🌑 Dark mode → ☀️ Light mode
@@ -72,6 +78,7 @@ All notable changes to this project will be documented in this file.
 - 💬 Tagline: "Stay organized" → "Shop, prep and go cook!"
 
 #### 🔄 Functionality Updates
+
 - 📝 Save Recipe button: Only activates on adding ingredients (not edit/delete)
 - 💾 Recipe updates: In-place updates (no duplicates)
 - 📋 Modal: Pre-populates with current recipe name for updates
@@ -103,15 +110,18 @@ All notable changes to this project will be documented in this file.
 ### Technical Details
 
 #### Database Schema
+
 - **ingredients** - Current shopping list items
-- **recipes** - Saved recipe collections  
+- **recipes** - Saved recipe collections
 - **recipe_ingredients** - Junction table linking recipes to ingredients
 
 #### API Endpoints
+
 - `GET/POST/PUT/DELETE /api/ingredients` - Ingredient CRUD
 - `GET/POST/PUT/DELETE /api/recipes` - Recipe CRUD with ingredients
 
 #### Stack
+
 - **Frontend**: Vue 3, TypeScript, Tailwind CSS, Iconify
 - **Backend**: Express.js, SQLite (better-sqlite3)
 - **Deployment**: Render.com with persistent disk storage
