@@ -154,7 +154,7 @@ const saveRecipe = async (recipeName: string) => {
   error.value = null;
   try {
     const ingredientNames = ingredients.value.map((i) => i.name);
-    
+
     // Check if we're updating an existing recipe
     if (currentRecipe.value) {
       // Update existing recipe (name and ingredients)
@@ -163,13 +163,13 @@ const saveRecipe = async (recipeName: string) => {
         recipeName,
         ingredientNames
       );
-      
+
       // Update in recipes list
       const index = recipes.value.findIndex((r) => r.id === currentRecipe.value!.id);
       if (index !== -1) {
         recipes.value[index] = updatedRecipe;
       }
-      
+
       currentRecipe.value = updatedRecipe;
     } else {
       // Create new recipe
@@ -207,7 +207,7 @@ const loadRecipeIngredients = async (recipe: Recipe) => {
 
     // Set current recipe
     currentRecipe.value = recipe;
-    
+
     // Mark as no unsaved changes (just loaded)
     hasUnsavedChanges.value = false;
     hasUserInteracted.value = false;
@@ -405,107 +405,33 @@ const dismissError = () => {
         <!-- Header -->
         <header class="mb-6 sm:mb-10">
           <div class="flex items-start gap-3 sm:gap-4">
-            <!-- Shopping Basket Logo SVG with Circle Border -->
+            <!-- Logo with Circle Border - Easy Icon Swapping -->
             <div class="relative flex-shrink-0">
               <div
-                class="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full border-2 border-green-700 bg-white/40 backdrop-blur-sm flex items-center justify-center p-2"
+                class="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full border-2 border-green-700 bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg"
+                style="
+                  filter: drop-shadow(0 1px 3px rgba(255, 255, 255, 0.5))
+                    drop-shadow(0 2px 6px rgba(255, 255, 255, 0.3));
+                "
               >
-                <svg
-                  class="w-full h-full text-green-800"
-                  viewBox="0 0 64 64"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  style="
-                    filter: drop-shadow(0 1px 3px rgba(255, 255, 255, 0.5))
-                      drop-shadow(0 2px 6px rgba(255, 255, 255, 0.3));
-                  "
-                >
-                  <!-- Basket handle -->
-                  <path
-                    d="M20 18C20 18 20 10 32 10C44 10 44 18 44 18"
-                    stroke="currentColor"
-                    stroke-width="3"
-                    stroke-linecap="round"
-                    fill="none"
-                  />
-
-                  <!-- Basket body -->
-                  <path
-                    d="M12 24L16 52C16 54 18 56 20 56H44C46 56 48 54 48 52L52 24H12Z"
-                    fill="currentColor"
-                    opacity="0.9"
-                  />
-
-                  <!-- Basket top rim -->
-                  <rect x="10" y="22" width="44" height="4" rx="1" fill="currentColor" />
-
-                  <!-- Basket weave lines -->
-                  <line
-                    x1="20"
-                    y1="28"
-                    x2="18"
-                    y2="52"
-                    stroke="white"
-                    stroke-width="1.5"
-                    opacity="0.3"
-                  />
-                  <line
-                    x1="28"
-                    y1="28"
-                    x2="26"
-                    y2="52"
-                    stroke="white"
-                    stroke-width="1.5"
-                    opacity="0.3"
-                  />
-                  <line
-                    x1="36"
-                    y1="28"
-                    x2="38"
-                    y2="52"
-                    stroke="white"
-                    stroke-width="1.5"
-                    opacity="0.3"
-                  />
-                  <line
-                    x1="44"
-                    y1="28"
-                    x2="46"
-                    y2="52"
-                    stroke="white"
-                    stroke-width="1.5"
-                    opacity="0.3"
-                  />
-
-                  <!-- Vegetables in basket -->
-                  <!-- Tomato -->
-                  <circle cx="24" cy="38" r="5" fill="#ef4444" opacity="0.8" />
-                  <path
-                    d="M24 33L24 35"
-                    stroke="#22c55e"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  />
-
-                  <!-- Lettuce/Leafy green -->
-                  <ellipse cx="38" cy="36" rx="6" ry="5" fill="#22c55e" opacity="0.7" />
-                  <path
-                    d="M35 34C36 32 40 32 41 34"
-                    stroke="#16a34a"
-                    stroke-width="1"
-                    fill="none"
-                  />
-
-                  <!-- Carrot -->
-                  <path
-                    d="M32 44L32 50"
-                    stroke="#f97316"
-                    stroke-width="3"
-                    stroke-linecap="round"
-                    opacity="0.8"
-                  />
-                  <path d="M32 43L31 41L33 41Z" fill="#22c55e" opacity="0.6" />
-                </svg>
+                <!-- 
+                  🎨 Try different food icons by changing the icon name below!
+                  
+                  Popular options:
+                  - mdi:shopping-outline (shopping cart)
+                  - mdi:basket-outline (basket)
+                  - mdi:food-apple (apple)
+                  - mdi:food-variant (covered dish)
+                  - mdi:bowl-mix-outline (mixing bowl)
+                  - mdi:chef-hat (chef hat)
+                  - mdi:pot-mix-outline (cooking pot)
+                  - mdi:leaf (fresh herbs)
+                  - mdi:carrot (carrot)
+                  - mdi:book-open-variant (recipe book)
+                  
+                  Browse all: https://icon-sets.iconify.design/mdi/?query=food
+                -->
+                <Icon icon="ph:chef-hat" class="text-4xl sm:text-5xl md:text-6xl text-green-800" />
               </div>
             </div>
             <div class="flex-1">
@@ -586,7 +512,7 @@ const dismissError = () => {
                         'px-3 py-2 sm:px-6 sm:py-2.5 rounded-lg sm:rounded-xl transition-all duration-300 font-semibold flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm border whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100',
                         hasUnsavedChanges
                           ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white border-green-500 hover:from-green-700 hover:to-emerald-700 hover:scale-105'
-                          : 'text-gray-700 bg-white/70 border-gray-300 hover:bg-white hover:border-gray-400 hover:text-gray-900 hover:scale-105'
+                          : 'text-gray-700 bg-white/70 border-gray-300 hover:bg-white hover:border-gray-400 hover:text-gray-900 hover:scale-105',
                       ]"
                       :disabled="!canSaveRecipe"
                       :title="
