@@ -1,7 +1,7 @@
 services:
   # Web Service - serves both frontend and backend
   - type: web
-    name: vuejs-aidd-todo-app
+    name: fresh-finds-recipes
     runtime: node
     plan: free
     region: oregon  # Choose: oregon, frankfurt, singapore, ohio
