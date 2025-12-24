@@ -517,17 +517,18 @@ const dismissError = () => {
                     <!-- Saved Recipes Dropdown -->
                     <div class="relative recipes-dropdown-container">
                       <button
-                        class="px-2 py-2 sm:px-6 sm:py-2.5 rounded-lg sm:rounded-xl transition-all duration-300 font-semibold flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm border text-gray-700 bg-white/70 border-gray-300 hover:bg-white hover:border-gray-400 hover:text-gray-900 hover:scale-105 whitespace-nowrap"
+                        class="max-[391px]:px-1.5 px-3 py-2 sm:px-6 sm:py-2.5 rounded-lg sm:rounded-xl transition-all duration-300 font-semibold flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm border text-gray-700 bg-white/70 border-gray-300 hover:bg-white hover:border-gray-400 hover:text-gray-900 hover:scale-105 whitespace-nowrap"
                         @click="showRecipesDropdown = !showRecipesDropdown"
                       >
                         <Icon
                           icon="mdi:book-open-variant"
-                          class="text-base sm:text-xl flex-shrink-0"
+                          class="max-[391px]:text-sm text-base sm:text-xl flex-shrink-0"
                         />
-                        <span>Saved Recipes</span>
+                        <span class="max-[391px]:hidden">Saved Recipes</span>
+                        <span class="hidden max-[391px]:inline">Recipes</span>
                         <Icon
                           icon="mdi:chevron-down"
-                          class="text-base sm:text-xl transition-transform duration-300 flex-shrink-0"
+                          class="max-[391px]:text-sm text-base sm:text-xl transition-transform duration-300 flex-shrink-0"
                           :class="{ 'rotate-180': showRecipesDropdown }"
                         />
                       </button>
@@ -574,7 +575,7 @@ const dismissError = () => {
                     <!-- Save Recipe Button - Secondary style when no changes -->
                     <button
                       :class="[
-                        'px-2 py-2 sm:px-6 sm:py-2.5 rounded-lg sm:rounded-xl transition-all duration-300 font-semibold flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm border whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100',
+                        'max-[391px]:px-1.5 px-3 py-2 sm:px-6 sm:py-2.5 rounded-lg sm:rounded-xl transition-all duration-300 font-semibold flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm border whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100',
                         hasUnsavedChanges
                           ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white border-green-500 hover:from-green-700 hover:to-emerald-700 hover:scale-105'
                           : 'text-gray-700 bg-white/70 border-gray-300 hover:bg-white hover:border-gray-400 hover:text-gray-900 hover:scale-105',
@@ -587,14 +588,19 @@ const dismissError = () => {
                       "
                       @click="openSaveModal"
                     >
-                      <Icon icon="mdi:content-save" class="text-base sm:text-xl flex-shrink-0" />
-                      <span>Save Recipe</span>
+                      <Icon
+                        icon="mdi:content-save"
+                        class="max-[391px]:text-sm text-base sm:text-xl flex-shrink-0"
+                      />
+                      <span class="max-[391px]:hidden">Save Recipe</span>
+                      <span class="hidden max-[391px]:inline">Save</span>
                     </button>
 
                     <!-- New Button - Only show when there are ingredients -->
                     <button
                       v-if="ingredients.length > 0"
-                      class="px-2 py-2 sm:px-6 sm:py-2.5 rounded-lg sm:rounded-xl transition-all duration-300 font-semibold flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm border text-gray-700 bg-white/70 border-gray-300 hover:bg-white hover:border-gray-400 hover:text-gray-900 hover:scale-105 whitespace-nowrap"
+                      class="max-[391px]:px-2 px-3 py-2 sm:px-6 sm:py-2.5 rounded-lg sm:rounded-xl transition-all duration-300 font-semibold flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm border text-gray-700 bg-white/70 border-gray-300 hover:bg-white hover:border-gray-400 hover:text-gray-900 hover:scale-105 whitespace-nowrap"
+                      aria-label="Start new recipe"
                       @click="handleNewRecipe"
                     >
                       <Icon
