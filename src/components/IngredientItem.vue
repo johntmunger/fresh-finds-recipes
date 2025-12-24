@@ -80,10 +80,7 @@ onBeforeUnmount(() => {
     @click="toggleActions"
   >
     <!-- Ingredient Icon -->
-    <Icon
-      icon="mdi:food-apple"
-      class="flex-shrink-0 text-green-600 text-xl sm:text-2xl"
-    />
+    <Icon icon="mdi:food-apple" class="flex-shrink-0 text-green-600 text-xl sm:text-2xl" />
 
     <!-- Ingredient Text or Input -->
     <div v-if="isEditing" class="flex-1">
@@ -130,4 +127,3 @@ onBeforeUnmount(() => {
     </div>
   </li>
 </template>
-

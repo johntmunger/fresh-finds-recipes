@@ -18,13 +18,16 @@ const emit = defineEmits<{
 const recipeName = ref("");
 
 // Watch for modal opening and pre-populate if current recipe exists
-watch(() => props.isOpen, (isOpen) => {
-  if (isOpen && props.currentRecipeName && props.currentRecipeName !== "Example Recipe") {
-    recipeName.value = props.currentRecipeName;
-  } else if (isOpen) {
-    recipeName.value = "";
+watch(
+  () => props.isOpen,
+  (isOpen) => {
+    if (isOpen && props.currentRecipeName && props.currentRecipeName !== "Example Recipe") {
+      recipeName.value = props.currentRecipeName;
+    } else if (isOpen) {
+      recipeName.value = "";
+    }
   }
-});
+);
 
 const handleSave = () => {
   if (recipeName.value.trim()) {
@@ -119,9 +122,7 @@ onBeforeUnmount(() => {
           </div>
 
           <!-- Footer -->
-          <div
-            class="flex items-center justify-end gap-3 p-6 border-t border-gray-200 bg-gray-50"
-          >
+          <div class="flex items-center justify-end gap-3 p-6 border-t border-gray-200 bg-gray-50">
             <button
               class="px-6 py-3 text-gray-700 hover:text-gray-900 bg-white hover:bg-gray-100 rounded-xl transition-all duration-300 font-semibold border border-gray-300"
               @click="handleClose"
@@ -164,4 +165,3 @@ onBeforeUnmount(() => {
   transform: scale(0.9);
 }
 </style>
-

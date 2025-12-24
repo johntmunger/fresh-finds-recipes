@@ -140,4 +140,3 @@ const showRecipesDropdown = ref(false);
   transform: translateY(10px);
 }
 </style>
-

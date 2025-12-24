@@ -14,4 +14,3 @@ export interface Recipe {
 }
 
 export type FilterType = "all" | "saved";
-

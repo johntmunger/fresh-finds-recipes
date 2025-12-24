@@ -16,7 +16,9 @@ const emit = defineEmits<{
 <template>
   <div v-if="ingredients.length > 0" class="mb-6 sm:mb-8">
     <!-- Two-column grid layout with scrolling -->
-    <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 max-h-[50vh] overflow-y-auto pr-1 sm:pr-2 scroll-smooth">
+    <ul
+      class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 max-h-[50vh] overflow-y-auto pr-1 sm:pr-2 scroll-smooth"
+    >
       <IngredientItem
         v-for="(ingredient, index) in ingredients"
         :key="ingredient.id"
@@ -35,12 +37,7 @@ const emit = defineEmits<{
       />
       <div class="absolute inset-0 blur-xl bg-green-500/5 animate-pulse"></div>
     </div>
-    <p
-      class="text-base sm:text-lg font-medium text-gray-600"
-    >
-      No ingredients yet. Add one above!
-    </p>
+    <p class="text-base sm:text-lg font-medium text-gray-600">No ingredients yet. Add one above!</p>
     <p class="text-xs sm:text-sm text-gray-500 mt-2">Start building your shopping list</p>
   </div>
 </template>
-

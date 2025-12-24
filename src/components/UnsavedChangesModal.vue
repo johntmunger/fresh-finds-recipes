@@ -62,9 +62,7 @@ onBeforeUnmount(() => {
           </div>
 
           <!-- Footer -->
-          <div
-            class="flex items-center justify-end gap-3 p-6 border-t border-gray-200 bg-gray-50"
-          >
+          <div class="flex items-center justify-end gap-3 p-6 border-t border-gray-200 bg-gray-50">
             <button
               class="px-6 py-3 text-gray-700 hover:text-gray-900 bg-white hover:bg-gray-100 rounded-xl transition-all duration-300 font-semibold border border-gray-300"
               @click="emit('close')"
@@ -112,4 +110,3 @@ onBeforeUnmount(() => {
   transform: scale(0.9);
 }
 </style>
-

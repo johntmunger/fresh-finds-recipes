@@ -582,12 +582,16 @@ const dismissError = () => {
                       </Transition>
                     </div>
 
-                    <!-- New Button -->
+                    <!-- New Button - Only show when there are ingredients -->
                     <button
+                      v-if="ingredients.length > 0"
                       class="px-3 py-2 sm:px-6 sm:py-2.5 rounded-lg sm:rounded-xl transition-all duration-300 font-semibold flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm border text-gray-700 bg-white/70 border-gray-300 hover:bg-white hover:border-gray-400 hover:text-gray-900 hover:scale-105 whitespace-nowrap"
                       @click="handleNewRecipe"
                     >
-                      <Icon icon="mdi:plus" class="text-base sm:text-xl flex-shrink-0" />
+                      <Icon
+                        icon="mdi:file-document-plus-outline"
+                        class="text-base sm:text-xl flex-shrink-0"
+                      />
                       <span>New</span>
                     </button>
                   </div>

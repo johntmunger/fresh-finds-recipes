@@ -7,7 +7,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  autoFocus: false
+  autoFocus: false,
 });
 
 const emit = defineEmits<{
@@ -58,4 +58,3 @@ onMounted(() => {
     </div>
   </form>
 </template>
-
