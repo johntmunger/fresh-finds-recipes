@@ -18,23 +18,40 @@ All notable changes to this project will be documented in this file.
 - ⏰ Readable timestamps on saved recipes (relative time: 5m ago, 2h ago, etc.)
 - 🆕 "New" button to start fresh ingredient lists with unsaved changes protection
 - 🔘 Button-style borders on edit/delete icons for better clarity
-- 💾 Persistent disk configuration for Render.com deployment
-- 🧺 Iconify-based logo system for easy icon swapping
+- 💾 Persistent disk configuration for Render.com deployment ($7/month)
+- 🧺 Iconify-based logo system for easy icon swapping (mdi:basket-outline)
+- 🍴 Fork and spoon favicon matching tagline
+- 📱 Ultra-responsive button layout with custom breakpoints
 
 #### Changed
-- 🛒 Logo updated to basket outline icon (mdi:basket-outline)
-- 📱 Favicon updated to match basket outline design
-- 💾 Recipe saving now properly updates existing recipes (no duplicates)
+- 🛒 Logo updated to basket outline icon with 3px border in green-800
+- 🔄 Button order: Saved Recipes → Save Recipe → New (left to right)
+- 📱 Dropdown now aligns to left edge (was right-aligned)
+- 💾 Recipe saving now properly updates existing recipes via PUT endpoint
 - 🟢 Save Recipe button: Only activates green on adding ingredients (not edit/delete)
 - 📝 Save modal pre-populates with current recipe name for quick updates
 - 🚫 Duplicate detection excludes current recipe from validation
 - 📏 Inline edit inputs use 16px font to prevent iOS zoom
+- 🆕 App always starts with empty state (clears leftover ingredients)
+- 🔄 Dropdown position changed from drop-up to dropdown
+- 🖱️ Click-away functionality on dropdowns and ingredient actions
 
 #### Fixed
 - 🐛 Recipe updates creating duplicate entries in database
 - 🐛 iOS zoom on inline editing (ingredient names and recipe names)
 - 🐛 Duplicate recipe warnings showing when updating current recipe
 - 🐛 Missing Vue template closing tags
+- 🐛 Duplicate __dirname declaration causing syntax error
+- 🐛 Persistent disk mount path blocking code files
+- 📱 iPhone 12 Pro (390px) navigation overflow
+- 📱 Mobile button spacing on screens 375px-390px
+- 📱 Button layout breaking on narrow screens (< 391px)
+
+#### Mobile Responsive Improvements
+- 📱 **Screens ≤390px**: Compact buttons with shortened text ("Recipes", "Save", "New")
+- 📱 **Screens 391px+**: Full button text and comfortable padding
+- 📱 Responsive breakpoint at `max-[391px]` for perfect iPhone compatibility
+- 📱 Tested on: iPhone SE (375px), iPhone 12 Pro (390px), iPhone Pro Max (430px)
 
 ### Added
 
