@@ -44,7 +44,7 @@ onMounted(async () => {
 
   // Always clear ingredients on app load to ensure fresh start
   if (ingredients.value.length > 0) {
-    console.log("Clearing leftover ingredients from previous session...");
+      // Clearing leftover ingredients from previous session
     for (const ingredient of ingredients.value) {
       await api.deleteIngredient(ingredient.id);
     }
@@ -514,26 +514,6 @@ const dismissError = () => {
               <div v-if="ingredients.length > 0 || recipes.length > 0" class="mb-6 sm:mb-8">
                 <div class="flex flex-col gap-2">
                   <div class="flex gap-2">
-                    <!-- Save Recipe Button - Secondary style when no changes -->
-                    <button
-                      :class="[
-                        'px-3 py-2 sm:px-6 sm:py-2.5 rounded-lg sm:rounded-xl transition-all duration-300 font-semibold flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm border whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100',
-                        hasUnsavedChanges
-                          ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white border-green-500 hover:from-green-700 hover:to-emerald-700 hover:scale-105'
-                          : 'text-gray-700 bg-white/70 border-gray-300 hover:bg-white hover:border-gray-400 hover:text-gray-900 hover:scale-105',
-                      ]"
-                      :disabled="!canSaveRecipe"
-                      :title="
-                        isDuplicateRecipe
-                          ? 'Recipe with these ingredients already exists'
-                          : 'Save current ingredients as a recipe'
-                      "
-                      @click="openSaveModal"
-                    >
-                      <Icon icon="mdi:content-save" class="text-base sm:text-xl flex-shrink-0" />
-                      <span>Save Recipe</span>
-                    </button>
-
                     <!-- Saved Recipes Dropdown -->
                     <div class="relative recipes-dropdown-container">
                       <button
@@ -556,7 +536,7 @@ const dismissError = () => {
                       <Transition name="dropdown">
                         <div
                           v-if="showRecipesDropdown && recipes.length > 0"
-                          class="absolute right-0 top-full mt-2 w-64 bg-white border border-gray-200 rounded-xl shadow-2xl overflow-hidden z-10 max-h-80 overflow-y-auto"
+                          class="absolute left-0 top-full mt-2 w-64 bg-white border border-gray-200 rounded-xl shadow-2xl overflow-hidden z-10 max-h-80 overflow-y-auto"
                         >
                           <button
                             v-for="recipe in recipes"
@@ -584,12 +564,32 @@ const dismissError = () => {
                         </div>
                         <div
                           v-else-if="showRecipesDropdown && recipes.length === 0"
-                          class="absolute right-0 top-full mt-2 w-64 bg-white border border-gray-200 rounded-xl shadow-2xl p-4 z-10"
+                          class="absolute left-0 top-full mt-2 w-64 bg-white border border-gray-200 rounded-xl shadow-2xl p-4 z-10"
                         >
                           <p class="text-sm text-gray-600 text-center">No saved recipes yet</p>
                         </div>
                       </Transition>
                     </div>
+
+                    <!-- Save Recipe Button - Secondary style when no changes -->
+                    <button
+                      :class="[
+                        'px-3 py-2 sm:px-6 sm:py-2.5 rounded-lg sm:rounded-xl transition-all duration-300 font-semibold flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm border whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100',
+                        hasUnsavedChanges
+                          ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white border-green-500 hover:from-green-700 hover:to-emerald-700 hover:scale-105'
+                          : 'text-gray-700 bg-white/70 border-gray-300 hover:bg-white hover:border-gray-400 hover:text-gray-900 hover:scale-105',
+                      ]"
+                      :disabled="!canSaveRecipe"
+                      :title="
+                        isDuplicateRecipe
+                          ? 'Recipe with these ingredients already exists'
+                          : 'Save current ingredients as a recipe'
+                      "
+                      @click="openSaveModal"
+                    >
+                      <Icon icon="mdi:content-save" class="text-base sm:text-xl flex-shrink-0" />
+                      <span>Save Recipe</span>
+                    </button>
 
                     <!-- New Button - Only show when there are ingredients -->
                     <button
