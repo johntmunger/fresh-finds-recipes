@@ -408,10 +408,11 @@ const dismissError = () => {
             <!-- Logo with Circle Border - Easy Icon Swapping -->
             <div class="relative flex-shrink-0">
               <div
-                class="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full border-2 border-green-700 bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg"
+                class="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full border-3 border-green-800 bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg"
                 style="
                   filter: drop-shadow(0 1px 3px rgba(255, 255, 255, 0.5))
                     drop-shadow(0 2px 6px rgba(255, 255, 255, 0.3));
+                  border-width: 3px;
                 "
               >
                 <!-- 
